@@ -9,7 +9,7 @@ function PostList() {
       setpost(res.data);
     };
     fetchPost();
-  }, []);
+  }, [post]);
 
   const renderedPosts = Object.values(post).map((post) => {
     return (
