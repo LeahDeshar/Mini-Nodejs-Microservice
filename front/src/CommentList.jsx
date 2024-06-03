@@ -1,20 +1,20 @@
-import axios from "axios";
-import React, { useEffect, useState } from "react";
+// import axios from "axios";
+import React from "react";
 
-function CommentList({ postId }) {
-  const [comment, setComment] = useState([]);
+function CommentList({ comments }) {
+  // const [comment, setComment] = useState([]);
 
-  useEffect(() => {
-    const fetchComment = async () => {
-      const res = await axios.get(
-        `http://localhost:4001/posts/${postId}/comments`
-      );
-      setComment(res.data);
-    };
-    fetchComment();
-  }, [comment, postId]);
+  // useEffect(() => {
+  //   const fetchComment = async () => {
+  //     const res = await axios.get(
+  //       `http://localhost:4001/posts/${postId}/comments`
+  //     );
+  //     setComment(res.data);
+  //   };
+  //   fetchComment();
+  // }, [comment, postId]);
 
-  const renderedComments = comment.map((comment) => {
+  const renderedComments = comments.map((comment) => {
     return <li key={comment?.id}>{comment?.content}</li>;
   });
   return (

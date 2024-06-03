@@ -8,6 +8,7 @@ app.use(cors());
 
 const posts = {};
 app.get("/posts", (req, res) => {
+  // console.log("Data sending");
   res.send(posts);
 });
 
