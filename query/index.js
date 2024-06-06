@@ -12,9 +12,7 @@ app.get("/posts", (req, res) => {
   res.send(posts);
 });
 
-app.post("/events", async (req, res) => {
-  const { type, data } = req.body;
-
+const handleEvent = () => {
   if (type === "PostCreated") {
     const { id, title } = data;
     posts[id] = { id, title, comments: [] };
@@ -35,9 +33,21 @@ app.post("/events", async (req, res) => {
     comment.content = content;
     // post.comments.push({ id, content, status });
   }
+};
+
+app.post("/events", async (req, res) => {
+  const { type, data } = req.body;
+
+  handleEvent(type, data);
   res.send({});
 });
 
-app.listen(4002, () => {
+app.listen(4002, async () => {
   console.log("Listening on 4002");
+
+  const res = await axios.get("http://localhost:4005/events");
+  for (let event of res.data) {
+    console.log("Processing event:", event.type);
+    handleEvent(event.type, event.data);
+  }
 });
